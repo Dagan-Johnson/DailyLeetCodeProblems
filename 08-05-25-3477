@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int count=0;
+    int numOfUnplacedFruits(vector<int>& fruits, vector<int>& baskets) {
+        for (int i = 0; i < fruits.size(); i++) {
+            for (int j = 0; j < baskets.size(); j++) {
+                if (fruits[i] <= baskets[j]) {
+                    baskets[j] = 0;
+                    count++;
+                    break;
+                }
+
+            }
+        }
+    return (fruits.size()-count);
+    }
+};
+//Take the number from group one check if its equal to or lesser than every
+//other number in baskets. if it is, set the basket to zero, increase count and dont check rest of baskets.
+//Final answer is equal to amount of entries in fruits with the amount placed subtracted.
