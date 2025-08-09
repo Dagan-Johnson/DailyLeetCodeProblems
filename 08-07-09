@@ -1,0 +1,105 @@
+//correct idea but slightly too long to load. Could be simplified by changing units to 1-4 instead of 0-100 in increments of 25.
+
+
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    double Aout = 0, ABout = 0, Bout = 0;
+    int S1, S2;
+    int levels = 0;
+    double ans = 0;
+    double soupServings(int n) {
+        if (n == 0)
+            return 0.5;
+        S1 = n;
+        S2 = n;
+        perf(S1, S2);
+        return ans;
+    }
+    void perf(int s1, int s2) {
+        if (s1 == 0)
+            return;
+        levels++;
+        perf1(s1, s2);
+        perf2(s1, s2);
+        perf3(s1, s2);
+        perf4(s1, s2);
+        levels--;
+        return;
+    }
+    void perf1(int x, int y) {
+        if (x <= 0 || y <= 0)
+            return;
+        if (x <= 100) {
+            Aout++;
+            ans = ans + pow(0.25, levels) * (1);
+            return;
+        } else {
+            perf(x - 100, y);
+        }
+    }
+    void perf2(int x, int y) {
+        if (x <= 0 || y <= 0)
+            return;
+        if (x <= 75 && y <= 25) {
+            ABout++;
+            ans = ans + pow(0.25, levels) * (0.5);
+            return;
+        }
+        if (x <= 75) {
+            Aout++;
+            ans = ans + pow(0.25, levels) * (1);
+            return;
+        }
+        if (y <= 25) {
+            Bout++;
+            return;
+        } else {
+            perf(x - 75, y - 25);
+        }
+    }
+    void perf3(int x, int y) {
+        if (x <= 0 || y <= 0)
+            return;
+        if (x <= 50 && y <= 50) {
+            ABout++;
+            ans = ans + pow(0.25, levels) * (0.5);
+            return;
+        }
+        if (x <= 50) {
+            Aout++;
+            ans = ans + pow(0.25, levels) * (1);
+            return;
+        }
+        if (y <= 50) {
+            Bout++;
+            return;
+        } else {
+            perf(x - 50, y - 50);
+        }
+    }
+    void perf4(int x, int y) {
+
+        if (x <= 0 || y <= 0)
+            return;
+        if (x <= 25 && y <= 75) {
+            ABout++;
+            ans = ans + pow(0.25, levels) * (0.5);
+            return;
+        }
+        if (x <= 25) {
+            Aout++;
+            ans = ans + pow(0.25, levels) * (1);
+            return;
+        }
+        if (y <= 75) {
+            Bout++;
+            return;
+        } else {
+            perf(x - 25, y - 75);
+        }
+    }
+};
