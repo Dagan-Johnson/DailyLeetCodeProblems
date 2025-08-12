@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> productQueries(int n, vector<vector<int>>& queries) {
+        bitset<8> v(n);// changing n into binary;
+        vector<int> powers;
+        int powersCount = 0;
+        vector<int> ans;
+        int gleb = 1;
+        for (int i = 0; i < 8; i++) { //checks through all the bit positions and if theres a 1 adds the 
+            if (v[i] == 1) {          //corresponding int value to the vector list of powers from earlier.
+                powers[powersCount] = pow(2, i);
+                powersCount++;
+            }
+        }
+
+        for (int j = 0; j < queries.size(); j++) { 
+            gleb = 1;
+            for (int k = queries[j][0]; k <= queries[j][1]; k++) { //k initially equal to lower range.
+                gleb = gleb * queries[j][k];                       //running till equal to upper range. 
+            }                                                      //Basically just multiplying all the values
+            ans.push_back(gleb);
+        }
+        return ans;
+    }
+};
