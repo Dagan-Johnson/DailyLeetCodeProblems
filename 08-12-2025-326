@@ -1,0 +1,22 @@
+class Solution {   //pretty simple recursive function basically the same as the previous powers of two question. 
+
+public:
+    bool isPowerOfThree(int n) {
+        bool ret;
+        if (n == 1)
+            return true;
+        ret = isT(n);
+        return ret;
+    }
+    bool isT(double n) {
+        bool ret;
+        if (n == 3)
+            return true;
+        if (n < 3)
+            return false;
+        else {
+            return isT(n / 3);
+        }
+    }
+};
+
