@@ -1,0 +1,29 @@
+class Solution {
+public:
+    long long zeroFilledSubarray(vector<int>& nums) {
+        long long count = 0;
+        long long level = 0;
+        for (int i = 0; i < nums.size(); i++) // iterate through list
+        {
+            if (nums[i] == 0) // start when a zero if found
+            {
+                for (int j = i; j < nums.size(); j++) {
+                    i = j; //update progress so you don't double count 0
+                    if (nums[j] == 0) {
+                        level++;
+                        count = count + level;
+                    } else if (j == nums.size()) {
+                        return count;
+                    } else {
+                        level = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+//the idea behind this is that if you consider subsets as having levels equal to the number of entries within the subset, adding an additional 0 will add +1 to every previous defined level and +1 to a newly defined level that is the new full subset
