@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minimumArea(vector<vector<int>>& grid) {
+
+        int top = grid.size(), left = grid[0].size(), right = 0, bottom = 0;
+
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[i].size(); j++) {
+
+                if (grid[i][j] == 1) {
+                    if (i < top)
+                        top = i;
+                    if (j < left)
+                        left = j;
+                    if (j > right)
+                        right = j;
+                    if (i > bottom)
+                        bottom = i;
+                }
+            }
+        }
+        cout << "Top: " << top << " Left: " << left << " Right: " << right
+             << " Bottom: " << bottom;
+
+        return ((bottom - top + 1) * (right - left + 1));
+    }
+};
+
+// grid.size() = row #, grid[0].size() = Column #, record top-most, left-most,
+// right-most,bottom-most. perform checks when you come accross a 1. First 1 you
+// come accros basically decides the height so topmost. Check the column of the
+// next one and if its column # is higher set that as the right-most, and if it
+// is lower set as left most. Same concept got bottom.
