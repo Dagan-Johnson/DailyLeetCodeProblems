@@ -1,0 +1,10 @@
+class Solution {
+public:
+    long long flowerGame(int n, int m) {
+        return (long long) m*n/2;
+    }
+};
+
+
+//see I was confused because they say flower "game" as if there is anything to choose, but there isn't so i was treating this much more open ended than it actually is.
+//if the two amount of flowers is even then alice doesen't win so thats out. So i guess we're just counting how many times we can -2 from either side keeping them above one.
