@@ -1,0 +1,15 @@
+//Distance can be represented as an absolute value of the difference between two numbers. After that you just have to account for if they're
+//the same, and return whichever is larger if not. 
+
+
+class Solution {
+public:
+    int findClosest(int x, int y, int z) {
+        x = abs(z - x);
+        y = abs(z - y);
+        if (x == y)
+            return 0;
+        else
+            return (x < y) ? 1 : 2;
+    }
+};
