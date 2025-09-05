@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int makeTheIntegerZero(int num1, int num2) {
+        if (num2==0) return popcount(unsigned(num1));
+        long long x=num1;
+        for(int k=1; k<36; k++){
+            x-=num2;//x=x-num2;
+            if (x<k) return -1;
+            if (x>=0 && k>=popcount((unsigned long long)(x))) return k;
+        }
+        return -1;
+    }
+};
+
+// Kind of a fun one. Essentilly if you think about adding two powers of two in bit form it will look like 0010000 + 000010 = 0010010
+// Essentially you will need at least as many operations of adding two powers of two as there are 1's in your current num.
+// This added with the fact you will be subtracting the same num2 'X' times, means that if you conintuously subtract num2, there should be 
+// an amount of 1's left that is the same as the number times powers of two will needed to be added together to reach that number. 
