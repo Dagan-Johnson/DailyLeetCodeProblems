@@ -1,0 +1,15 @@
+//pretty lame one with a word game about alice and bob. 
+
+bool doesAliceWin(string s) {
+        int count=0;
+        for(int i=0; i<s.length(); i++)
+        {
+            if(isVowel(s[i])) return true;
+        }
+        return false;
+    }
+    bool isVowel(char ch)
+    {
+        string str = "aeiouAEIOU";
+        return (str.find(ch) != string::npos);
+    }
