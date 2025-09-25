@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int sum= triangle[0][0];
+        int pos =0;
+        for(int i=1;i<triangle.size();i++)
+        {
+            if (triangle[i][pos]<triangle[i][pos+1]){
+                sum += triangle[i][pos];
+            }
+            else{
+                pos ++;
+                sum += triangle[i][pos];
+            }
+
+        }
+        return sum;
+    }
+};
+//initial thought was that you since it is from the top down that you wouldn't get to know the actuall lowest but would just choose the lowest.
+// unfortunatly it was an incorrect. Ultimately I would have probably tried to just add all the numbers and take the lowest sum if I had a little more time. 
