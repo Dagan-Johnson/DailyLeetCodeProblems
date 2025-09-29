@@ -1,0 +1,89 @@
+//This is my final answer. So I was right about the previous attempt being too complicated. Found a solution that
+//I liked where instead of counting the most and saving all of the numbers and blah blah, you simply set up a vector 
+//for each number possibility 1-6 and count one any time they come up. Then if at any point the count of the top plus 
+//the count of a number on the bottom minus the amount that are the same are equal to the number of dominoes than thats 
+//the answer and if not return the -1.
+
+int minDominoRotations(vector<int>& A, vector<int>& B) {
+        vector<int> CA(7),CB(7),CS(7);
+        int size = A.size();
+        for(int i=0;i<size;i++){
+            CA[A[i]]++;
+            CB[B[i]]++;
+            if(A[i]==B[i])CS[A[i]]++;
+        }
+        for(int i=1;i<7;i++){
+            if(CA[i]+CB[i]-CS[i] == size)return size- max(CA[i],CB[i]);
+        }
+        return -1;
+    }
+};
+
+//This is just the first part of the problem, unfortunatly i am going to have restart as I feel like we're iterating too many times over 
+//this list and it's getting a little more complicated than i like. Started by finding the most common number, finding how many in the 
+top and bottom and returning whichever is lower. Too bad this doesen't work for double dominoes only show the most common. So ill start
+over and post an update here hopefully.
+
+int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
+        int most = tops[0];
+        int mostC =1;
+        int current=tops[0];
+        int cc =0;
+
+        vector<int> a = tops;
+        sort(a.begin(),a.end());
+        vector<int> b = bottoms;
+        sort(b.begin(),b.end());
+
+        for (int i=0; i<a.size(); i++){
+            if(a[i] == current){
+                cc++;
+                if(cc>mostC){
+                    most=a[i];
+                    mostC=cc;
+                }
+            }
+            else{
+                current = a[i];
+                cc=1;
+            }
+        }
+        cc=0;
+        current=b[0];
+        for (int i=0; i<b.size(); i++){
+            if(b[i] == current){
+                cc++;
+                if(cc>mostC){
+                    most=b[i];
+                    mostC=cc;
+                }
+                if(b[i] == most){
+                    mostC++;
+                }
+                else{
+                current = b[i];
+                cc=1;
+                }
+            }
+        }
+        int tc=0;
+        int bc=0;
+        for(int i =0; i<tops.size(); i++){
+            if(tops[i] == most)tc++;
+            if(bottoms[i] == most)bc++;
+        }
+        cout<< most<< ": "<<mostC;
+        int notC=0;
+        if(tc>bc){
+            for(int i=0;i<tops.size();i++){
+                if(tops[i] != most)notC++;
+            }
+            return notC;
+        }
+        else{
+            for(int i=0;i<bottoms.size();i++){
+                if(bottoms[i] != most)notC++;
+            }
+            return notC;
+        }
+    }
