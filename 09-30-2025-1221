@@ -1,0 +1,13 @@
+Not too sure why this one is a meduium as you just do exactly what you would think. Not too much real world use for this one i fear as it isn't too safe for the data.
+
+int triangularSum(vector<int>& nums) {
+        int n = nums.size(), x = nums.size();
+        while (x > 1) {
+            for (int j = 0; j < n - 1; j++) {
+                nums[j] = ((nums[j] + nums[j + 1]) % 10);
+            }
+            x--;
+        }
+        return nums[0];
+    }
+};
