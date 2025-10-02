@@ -1,0 +1,21 @@
+//You are supplied with a number of bottles that are full and an exchange rate which increases by one each time you exchange empties for fulls. You 
+//have to see how many fulls you can possibly drink no biggie just folllow the rules of da game. Pretty easy 1 2day.
+
+int maxBottlesDrunk(int a, int b) {
+        int drunk = a, empty = a;
+        a = 0;
+
+        while (a != 0 || empty >= b) {
+            if (a != 0) {
+                drunk += a;
+                empty +=a;
+                a=0;
+            }
+            while(empty>=b){
+                empty -=b;
+                b++;
+                a++;
+            }
+        }
+        return drunk;
+    }
