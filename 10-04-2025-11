@@ -1,0 +1,30 @@
+//Alrighty, so the double pointer method was much faster un surprisingly. Looks like for this problem the best thing to do is just to move two pointers based on which one is smaller inward.
+//Definitly a lil surprised by how little code the second solution took. 
+int maxArea(vector<int>& height) {
+    if(height.size() == 2){
+        return min(height[0],height[1]);
+    }
+
+    int max = 0;
+    bool stope = true;
+    int ptr1 = 0, ptr2 = height.size() - 1;
+    while (ptr1 != ptr2) {
+        int current = min(height[ptr1],height[ptr2]) * (ptr2-ptr1);
+        if(current > max) max = current;
+        (height[ptr1] < height[ptr2]) ? ptr1++ : ptr2--;
+    }
+    return max;
+}
+};
+
+//unfortunatly takes too long, although it is a solution. Going to try the offered method of using two pointers. 
+int maxArea(vector<int>& height) {
+    int max = 0;
+    for (int i = 0; i < height.size(); i++) {
+        for (int j = i+1; j < height.size(); j++) {
+            int current = min(height[i],height[j]) * (j-i);
+            if (current > max) max = current;
+        }
+    }
+    return max;
+}
