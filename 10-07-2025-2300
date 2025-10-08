@@ -1,0 +1,27 @@
+//unfortunatly timed out again. Were essentially checking ordered pair values to see if the pass the threshold. I tried to just add on some small speedups and it did get me over some bumps,
+// but theyre looking for like a real speed up so if i have time we'll see!
+vector<int> successfulPairs(vector<int>& spells, vector<int>& potions,
+                                long long success) {
+        vector<int> ans;
+        sort(potions.begin(), potions.end());
+        sort(spells.begin(), spells.end());
+        for (int i = 0; i < spells.size(); i++) {
+            for (int j = 0; j < potions.size(); j++) {
+                long long sp = spells[i], po = potions[j];
+
+                if ((sp * po) >= success) {
+                    if (j == 0) {
+                        for (int k = i; k < spells.size(); k++) {
+                            ans.push_back(potions.size());
+                        }
+                        return ans;
+                    }
+                    ans.push_back(potions.size() - j);
+                    break;
+                }
+                if (j == potions.size() - 1)
+                    ans.push_back(0);
+            }
+        }
+        return ans;
+    }
