@@ -1,0 +1,20 @@
+//not too much to say about this one. Needed to restart in the middle because of some scheduling related stuff to the two for loops/ I like the while second more so however.
+// For the record, this is correct and it will work, it just aint fast enough. 
+int maximumEnergy(vector<int>& energy, int k) {
+    int size = energy.size();
+    long long max = -1000000000;
+
+    for (int i=0;i<size;i++){
+        int j=i+k;
+        long long current =energy[i];
+        while(j < size){
+
+            long long nextz = energy[j];
+            current = current + nextz;
+            j += k; 
+        }
+        if (current > max) max = current;
+    }
+    return max;
+}
+};
