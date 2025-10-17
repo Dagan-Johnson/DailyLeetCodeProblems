@@ -1,0 +1,20 @@
+// had to look up a solution for this one, but honestly if i just drew out a state diagram I could have done it. 
+// essentially having runs of increasing numbers that are next to each other. 
+
+class Solution {
+public:
+    int maxIncreasingSubarrays(vector<int>& nums) {
+        int soze = nums.size();
+        int maxx=0, last=0, current =1;
+        for(int i=1;i<soze;i++){
+            if(nums[i] > nums[i-1])current++;
+            else{
+                maxx = max({maxx,current/2,min(last,current)});
+                last = current;
+                current = 1;
+            }
+        }
+        maxx = max({maxx,current/2,min(last,current)});
+        return maxx;
+    }
+};
