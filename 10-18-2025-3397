@@ -1,0 +1,46 @@
+// This was one of the posted solutions. Looks like they check if the current - k is larger than the previous number +1 (since the previous number will be taking that numbers slot you just check it +1 since that would be open.)
+
+class Solution {
+public:
+    int maxDistinctElements(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        int ans=0, prev= -100000000;
+
+        for(int i=0;i<nums.size();i++){
+            int x = max(nums[i]-k, prev+1);
+            if(x <= nums[i]+k){
+                prev=x;
+                ans++;
+            }
+        }
+    return ans;
+    }
+};
+
+// this is a basket sort problem in disguise. Essentially numbers in the input vector should try to be unique as much as possible and you can add or sub a single time using numbers between +-k.
+// My solution was to create a vector of size = largest value in nums, then when a number appears the bucket with the same value gets changed to a 1. If a bucket gets checked and there is already
+// a one, the for loop checks nearby buckets in the range. Got an error about out of bounds so there's some issue, but I just liked this solution. 
+class Solution {
+public:
+    int maxDistinctElements(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        nums[0] = nums[0] - k;
+        int prev = nums[0];
+        int soze = nums[nums.size()-1];
+        vector<int> slots(soze);
+        slots[prev] = 1;
+        for (int i = 1; i < nums.size(); i++) {
+            int current = nums[i];
+            if (slots[current] == 1) {
+                for (int j = -k; j < k; j++) {
+                    if(slots[j] != 1){
+                        slots[j] == 1;
+                        break;
+                    }
+                }
+            }
+            prev = current;
+        }
+        return slots.size();
+    }
+};
