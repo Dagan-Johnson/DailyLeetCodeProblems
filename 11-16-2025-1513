@@ -1,0 +1,20 @@
+Asking you to find the number of stubstrings able to be created out of sets of all ones. Essentially you just need to add to the ans by the number of consequtive 1s as there has been. 
+class Solution {
+public:
+    int numSub(string s) {
+        int cons=1;
+        int ans =0;
+        int mod = 1e9+7;
+        for(int i=0;i<s.size();i++){
+            if(s[i] == '1'){
+                ans = (ans + cons) % mod;
+                cons++;
+            }
+            if(s[i] != '1')
+            {
+                cons =1;
+            }
+        }
+        return ans;
+    }
+};
