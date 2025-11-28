@@ -1,0 +1,58 @@
+
+long long maxSubarraySum(vector<int>& nums, int k) {
+        int wl = nums.size() / k;
+        long long max = -1000000000;
+        for (int j = 1; j <= wl; j++) 
+        {
+            long long curr = 0;
+            int left =0;
+            int right = k * j;
+            for (int i = 0; i < nums.size(); i++) {
+                if (i >= right) {
+                    curr = curr - nums[left] + nums[right];
+                    left++;
+                    right++;
+                } else {
+                    curr += nums[i];
+                }
+                if (curr > max && i>=k-1)
+                    max = curr;
+            }
+        }
+        return max;
+    }
+};
+
+Looks like my other solution from yesterday wasn't saved so this is actually my second iteration answer that i'm setting to the side again to restart.
+long long maxSubarraySum(vector<int>& nums, int k) {
+        int hm = nums.size() / k;
+        long long maxsum = 0;
+        long long cur2;
+
+        //if(k == 1)return *max_element(nums.begin(),nums.end());
+        if (hm < 2) {
+            int sum = 0;
+            for (int i = 0; i < k; i++)
+                sum += nums[i];
+            return sum;
+        }
+        for (int i = 1; i < hm + 1; i++) {
+            int window = i * k;
+            int left = 0, right = window;
+            long long cursum = 0;
+            for (int j = 0; j < nums.size() - 1; j++) {
+                if (j < k)
+                    cursum += nums[j];
+                else {
+                    cur2 = cursum - nums[left] + nums[right];
+                    if (cur2 > cursum)
+                        cursum = cur2;
+                    left++;
+                    right++;
+                }
+                if (cursum > maxsum)
+                    maxsum = cursum;
+            }
+        }
+        return maxsum;
+    }
