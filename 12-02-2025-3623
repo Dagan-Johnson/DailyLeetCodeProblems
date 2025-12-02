@@ -1,0 +1,21 @@
+//The method of going about counting makes sense, but it seems as if the sort funtion sorts along the first number in the ordered pair, I could make a helper function with it, but instead I'd rather devote time to understanding how others did it simpler.
+int countTrapezoids(vector<vector<int>>& points) {
+    if (points.size() < 4)
+        return 0;
+    sort(points.begin(), points.end());
+    int count = 0;
+
+    for (int i = 0; i < points.size(); i++) {
+        for (int j = i + 1; j < points.size(); j++) {
+            if (points[i][0] == points[j][0]) {
+                for (int k = j + 1; k < points.size(); k++) {
+                    for (int l = k + 1; l < points.size(); l++) {
+                        if (points[k][0] == points[l][0] && points[k][0] != points[i][0])
+                            count++;
+                    }
+                }
+            }
+        }
+    }
+    return count;
+}
