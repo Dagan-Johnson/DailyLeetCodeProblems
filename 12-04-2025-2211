@@ -1,0 +1,25 @@
+Problem provides a string with rules for transformation and counting potential 'collisions' nothing to much to say about this one. 
+int countCollisions(string directions) {
+        int count = 0;
+        for (int i = 0; i < directions.size() - 1; i++) {
+            char curr = directions[i];
+            char nex = directions[i + 1];
+            if (curr == 'R' && nex == 'L') {
+               // cout<<i<<i+1<<endl;
+                directions[i] = 'S';
+                directions[i+1] = 'S';
+                count += 2;
+            };
+            if (curr == 'R' && nex == 'S') {
+               // cout<<i<<i+1<<endl;
+                directions[i] = 'S';
+                count++;
+            };
+            if (curr == 'S' && nex == 'L') {
+                //cout<<i<<i+1<<endl;
+                directions[i+1] = 'S';
+                count++;
+            };
+        }
+        return count;
+    }
